@@ -1,12 +1,13 @@
-package com.github.jakobwilms.weatherdb;
+package com.github.jakobwilms.weatherdb.we;
 
+import com.github.jakobwilms.weatherdb.Date;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import static com.github.jakobwilms.weatherdb.DBUtils.*;
+import static com.github.jakobwilms.weatherdb.db.DBUtils.*;
 
 public record Weather(int id, Date date,
                       MinMaxMedium temperature,

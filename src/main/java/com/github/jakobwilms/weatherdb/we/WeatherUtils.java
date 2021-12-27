@@ -1,5 +1,6 @@
-package com.github.jakobwilms.weatherdb;
+package com.github.jakobwilms.weatherdb.we;
 
+import com.github.jakobwilms.weatherdb.TimeUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,7 +11,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
-import static com.github.jakobwilms.weatherdb.DBUtils.*;
+import static com.github.jakobwilms.weatherdb.db.DBUtils.*;
 import static com.github.jakobwilms.weatherdb.Utils.print;
 
 public class WeatherUtils {
@@ -98,9 +99,10 @@ public class WeatherUtils {
     public static void start() {
         if (!started) {
             started = true;
-            service60.scheduleAtFixedRate(runnable60, 0L, 60, TimeUnit.SECONDS);
-            service3600.scheduleAtFixedRate(runnable3600, 15L, 3600, TimeUnit.SECONDS);
-            service86400.scheduleAtFixedRate(runnable86400, 60L, 86400, TimeUnit.SECONDS);
+            int sec = TimeUtils.getSecond(), min = TimeUtils.getMinute(), hour = TimeUtils.getHour();
+            service60.scheduleAtFixedRate(runnable60, 60 - sec, 60, TimeUnit.SECONDS);
+            service3600.scheduleAtFixedRate(runnable3600, 3600 - (min * 60L) - sec + 15, 3600, TimeUnit.SECONDS);
+            service86400.scheduleAtFixedRate(runnable86400, 86400 - (hour * 3600L) - (min * 60L) - sec + 60, 86400, TimeUnit.SECONDS);
         }
     }
 

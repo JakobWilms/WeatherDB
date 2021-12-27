@@ -35,4 +35,12 @@ public class TimeUtils {
     public static int getHour() {
         return Integer.parseInt(getDate2().substring(8, 9));
     }
+
+    public static int getSecond() {
+        return Integer.parseInt(getDate().substring(17, 18));
+    }
+
+    public static int getMinute() {
+        return Integer.parseInt(getDate().substring(14, 15));
+    }
 }

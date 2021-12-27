@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.github.jakobwilms.weatherdb.DBUtils.*;
+import static com.github.jakobwilms.weatherdb.db.DBUtils.*;
 import static com.github.jakobwilms.weatherdb.Utils.print;
-import static com.github.jakobwilms.weatherdb.WeatherUtils.*;
+import static com.github.jakobwilms.weatherdb.we.WeatherUtils.*;
 
 public class Main {
     public static void main(String[] args) {
