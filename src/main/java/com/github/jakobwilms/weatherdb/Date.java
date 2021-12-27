@@ -1,5 +1,7 @@
 package com.github.jakobwilms.weatherdb;
 
+import org.jetbrains.annotations.Contract;
+
 import static com.github.jakobwilms.weatherdb.TimeUtils.*;
 
 public record Date(int year, int month, int day, int hour) {
@@ -14,5 +16,11 @@ public record Date(int year, int month, int day, int hour) {
 
     public Date() {
         this(getYear(), getMonth(), getDay(), getHour());
+    }
+
+    @Contract(pure = true)
+    @Override
+    public String toString() {
+        return "" + year + "-" + month + "-" + day + "-" + hour;
     }
 }

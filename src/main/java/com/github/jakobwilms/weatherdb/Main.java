@@ -13,12 +13,15 @@ public class Main {
         try (Connection connection = DriverManager
                 .getConnection("jdbc:mysql://localhost/test1", "user", "password")) {
             boolean isValid = connection.isValid(0);
-            print("Valid connection: " + isValid);
+            print("Valid Connection: " + isValid);
 
             if (!isValid) {
                 System.exit(-1);
             }
             setConnection(connection);
+
+            setTable("weatherHourly"); createTable();
+            setTable("weatherDaily"); createTable();
 
             start();
         } catch (SQLException ignored) {
