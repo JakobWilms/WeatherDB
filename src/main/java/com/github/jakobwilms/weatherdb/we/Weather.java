@@ -1,6 +1,6 @@
 package com.github.jakobwilms.weatherdb.we;
 
-import com.github.jakobwilms.weatherdb.Date;
+import com.github.jakobwilms.weatherdb.ut.Date;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

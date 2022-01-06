@@ -1,4 +1,4 @@
-package com.github.jakobwilms.weatherdb;
+package com.github.jakobwilms.weatherdb.ut;
 
 import org.jetbrains.annotations.NotNull;
 

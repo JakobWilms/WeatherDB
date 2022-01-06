@@ -1,4 +1,4 @@
-package com.github.jakobwilms.weatherdb;
+package com.github.jakobwilms.weatherdb.ut;
 
 public class Utils {
     public static void print(String msg) {

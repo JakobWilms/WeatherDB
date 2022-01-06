@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.IntStream;
 
-import static com.github.jakobwilms.weatherdb.Utils.print;
+import static com.github.jakobwilms.weatherdb.ut.Utils.print;
 import static com.github.jakobwilms.weatherdb.db.DBUtils.*;
 
 public class DBUpdate {

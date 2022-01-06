@@ -1,8 +1,8 @@
-package com.github.jakobwilms.weatherdb;
+package com.github.jakobwilms.weatherdb.ut;
 
 import org.jetbrains.annotations.Contract;
 
-import static com.github.jakobwilms.weatherdb.TimeUtils.*;
+import static com.github.jakobwilms.weatherdb.ut.TimeUtils.*;
 
 public record Date(int year, int month, int day, int hour) {
     public Date {

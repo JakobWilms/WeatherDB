@@ -1,6 +1,7 @@
 package com.github.jakobwilms.weatherdb.db;
 
-import com.github.jakobwilms.weatherdb.Date;
+import com.github.jakobwilms.weatherdb.Main;
+import com.github.jakobwilms.weatherdb.ut.Date;
 import com.github.jakobwilms.weatherdb.we.MinMaxMedium;
 import com.github.jakobwilms.weatherdb.we.Weather;
 import org.jetbrains.annotations.Contract;
@@ -11,10 +12,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import static java.lang.Float.parseFloat;
-import static java.lang.Integer.parseInt;
-import static java.lang.String.valueOf;
 
 public class DBUtils {
 
@@ -80,27 +77,37 @@ public class DBUtils {
     @Contract("_ -> new")
     public static String @NotNull [] _toString(@NotNull Weather weather) {
         return new String[]{
-                valueOf(weather.id()),
-                valueOf(weather.date().year()), valueOf(weather.date().month()), valueOf(weather.date().day()), valueOf(weather.date().hour()),
-                valueOf(weather.temperature().min()), valueOf(weather.temperature().max()), valueOf(weather.temperature().medium()),
-                valueOf(weather.rainfall().min()), valueOf(weather.rainfall().max()), valueOf(weather.rainfall().medium()),
-                valueOf(weather.humidity().min()), valueOf(weather.humidity().max()), valueOf(weather.humidity().medium()),
-                valueOf(weather.wind().min()), valueOf(weather.wind().max()), valueOf(weather.wind().medium()),
-                valueOf(weather.clouds().min()), valueOf(weather.clouds().max()), valueOf(weather.clouds().medium())
+                String.valueOf(weather.id()),
+                String.valueOf(weather.date().year()), String.valueOf(weather.date().month()), String.valueOf(weather.date().day()), String.valueOf(weather.date().hour()),
+                String.valueOf(weather.temperature().min()), String.valueOf(weather.temperature().max()), String.valueOf(weather.temperature().medium()),
+                String.valueOf(weather.rainfall().min()), String.valueOf(weather.rainfall().max()), String.valueOf(weather.rainfall().medium()),
+                String.valueOf(weather.humidity().min()), String.valueOf(weather.humidity().max()), String.valueOf(weather.humidity().medium()),
+                String.valueOf(weather.wind().min()), String.valueOf(weather.wind().max()), String.valueOf(weather.wind().medium()),
+                String.valueOf(weather.clouds().min()), String.valueOf(weather.clouds().max()), String.valueOf(weather.clouds().medium())
         };
     }
 
     @Contract("_ -> new")
     public static @NotNull Weather _toWeather(String @NotNull [] strings) {
         return new Weather(
-                parseInt(strings[0]),
-                new Date(parseInt(strings[1]), parseInt(strings[2]), parseInt(strings[3]), parseInt(strings[4])),
-                new MinMaxMedium(parseFloat(strings[5]), parseFloat(strings[6]), parseFloat(strings[7])),
-                new MinMaxMedium(parseFloat(strings[8]), parseFloat(strings[9]), parseFloat(strings[10])),
-                new MinMaxMedium(parseFloat(strings[11]), parseFloat(strings[12]), parseFloat(strings[13])),
-                new MinMaxMedium(parseFloat(strings[14]), parseFloat(strings[15]), parseFloat(strings[16])),
-                new MinMaxMedium(parseFloat(strings[17]), parseFloat(strings[18]), parseFloat(strings[19]))
+                Integer.parseInt(strings[0]),
+                new Date(Integer.parseInt(strings[1]), Integer.parseInt(strings[2]), Integer.parseInt(strings[3]), Integer.parseInt(strings[4])),
+                new MinMaxMedium(Float.parseFloat(strings[5]), Float.parseFloat(strings[6]), Float.parseFloat(strings[7])),
+                new MinMaxMedium(Float.parseFloat(strings[8]), Float.parseFloat(strings[9]), Float.parseFloat(strings[10])),
+                new MinMaxMedium(Float.parseFloat(strings[11]), Float.parseFloat(strings[12]), Float.parseFloat(strings[13])),
+                new MinMaxMedium(Float.parseFloat(strings[14]), Float.parseFloat(strings[15]), Float.parseFloat(strings[16])),
+                new MinMaxMedium(Float.parseFloat(strings[17]), Float.parseFloat(strings[18]), Float.parseFloat(strings[19]))
         );
+    }
+
+    public static void createDB(@NotNull Connection connection) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("CREATE DATABASE IF NOT EXISTS " + Main.arguments().getDatabase());
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void createTable() {

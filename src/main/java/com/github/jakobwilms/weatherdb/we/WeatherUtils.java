@@ -1,6 +1,8 @@
 package com.github.jakobwilms.weatherdb.we;
 
-import com.github.jakobwilms.weatherdb.TimeUtils;
+import com.github.jakobwilms.weatherdb.db.DBUtils;
+import com.github.jakobwilms.weatherdb.ut.TimeUtils;
+import com.github.jakobwilms.weatherdb.ut.Utils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,9 +12,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
-
-import static com.github.jakobwilms.weatherdb.db.DBUtils.*;
-import static com.github.jakobwilms.weatherdb.Utils.print;
 
 public class WeatherUtils {
 
@@ -42,18 +41,18 @@ public class WeatherUtils {
                 minMaxMedium(floats[3]), minMaxMedium(floats[4])
         );
 
-        print("Measured: " + weather);
-        setTable("weatherHourly");
-        boolean b = insert(weather);
+        Utils.print("Measured: " + weather);
+        DBUtils.setTable("weatherHourly");
+        boolean b = DBUtils.insert(weather);
         if (b)
-            print("Successfully inserted into database!");
+            Utils.print("Successfully inserted into database!");
     };
     private static final Runnable runnable86400 = () -> {
-        setTable("weatherHourly");
+        DBUtils.setTable("weatherHourly");
 
         List<Weather> weatherList = new ArrayList<>();
-        int c = count();
-        IntStream.range(0, 24).forEach(i -> weatherList.add(select(c - 24 + i)));
+        int c = DBUtils.count();
+        IntStream.range(0, 24).forEach(i -> weatherList.add(DBUtils.select(c - 24 + i)));
 
         float[][] floats = new float[5][];
         IntStream.range(0, weatherList.size()).forEach(i -> floats[0][i] = weatherList.get(i).temperature().medium());
@@ -67,12 +66,12 @@ public class WeatherUtils {
                 minMaxMedium(floats[3]), minMaxMedium(floats[4])
         );
 
-        print("TODAY: " + weather);
-        setTable("weatherDaily");
-        boolean b = insert(weather);
+        Utils.print("TODAY: " + weather);
+        DBUtils.setTable("weatherDaily");
+        boolean b = DBUtils.insert(weather);
         if (b)
-            print("Successfully inserted into database!");
-        setTable("weatherHourly");
+            Utils.print("Successfully inserted into database!");
+        DBUtils.setTable("weatherHourly");
     };
 
 
