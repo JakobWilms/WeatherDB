@@ -28,6 +28,8 @@ public class FXMain extends Application {
         try {
             fxPanes = new FXPanes();
 
+            FXPanes.setSelectedPane(getFxPanes().getWelcomeBox());
+
             PerspectiveCamera camera = new PerspectiveCamera();
             camera.setFieldOfView(10);
 

@@ -5,23 +5,27 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.layout.*;
 import org.jetbrains.annotations.NotNull;
 
 final class FXPanes {
 
-    private static Pane selectedPane;
+    private static Node selectedPane;
 
     private final @NotNull GridPane mainPane;
     private final @NotNull FlowGridPane weatherDBPane, menuPane, timePane;
     private final @NotNull FlowGridPane overviewPane, currentPane, currentPaneBottom, dayPane, dayPaneBottom, monthPane, monthPaneBottom, yearPane, yearPaneBottom,
-            tempPane, rainfallPane, windPane, cloudsPane, humidityPane;
-    private final @NotNull VBox currentBox,dayBox, monthBox, yearBox;
+    tempPane, rainfallPane, windPane, cloudsPane, humidityPane;
+    private final @NotNull HBox currentBoxBottom, dayBoxBottom, monthBoxBottom, yearBoxBottom;
+    private final @NotNull VBox currentBox, dayBox, monthBox, yearBox;
 
     private final @NotNull VBox welcomeBox;
 
     private final @NotNull GridPane tileAlignment;
     private final @NotNull StackPane tilePane;
+
+
     public FXPanes() {
         this.weatherDBPane = FXPaneUtils.weatherDBPane();
 
@@ -48,14 +52,20 @@ final class FXPanes {
         this.cloudsPane = FXPaneUtils.cloudsPane();
         this.humidityPane = FXPaneUtils.humidityPane();
 
-        this.currentBox = new VBox(5, getCurrentPane(), getCurrentPaneBottom());
-        this.dayBox = new VBox(5, getDayPane(), getDayPaneBottom());
-        this.monthBox = new VBox(5, getMonthPane(), getMonthPaneBottom());
-        this.yearBox = new VBox(5, getYearPane(), getYearPaneBottom());
+        this.currentBoxBottom = new HBox(5, getCurrentPaneBottom());
+        this.dayBoxBottom = new HBox(5, getDayPaneBottom());
+        this.monthBoxBottom = new HBox(5, getMonthPaneBottom());
+        this.yearBoxBottom = new HBox(5, getYearPaneBottom());
+
+        this.currentBox = new VBox(5, getCurrentPane(), getCurrentBoxBottom());
+        this.dayBox = new VBox(5, getDayPane(), getDayBoxBottom());
+        this.monthBox = new VBox(5, getMonthPane(), getMonthBoxBottom());
+        this.yearBox = new VBox(5, getYearPane(), getYearBoxBottom());
 
         this.welcomeBox = FXPaneUtils.welcomeBox();
 
-        this.tilePane = new StackPane(getWelcomeBox(), getOverviewPane(), getCurrentBox(), getDayBox(), getMonthBox(), getYearBox(),
+        this.tilePane = new StackPane(getWelcomeBox(), getOverviewPane(),
+                getCurrentBox(), getDayBox(), getMonthBox(), getYearBox(),
                 getTempPane(), getWindPane(), getRainfallPane(), getCloudsPane(), getHumidityPane());
         FXPaneUtils.tilePane(getTilePane());
 
@@ -100,6 +110,19 @@ final class FXPanes {
         vBox(getDayBox());
         vBox(getMonthBox());
         vBox(getYearBox());
+
+        hBox(getCurrentBoxBottom());
+        hBox(getDayBoxBottom());
+        hBox(getMonthBoxBottom());
+        hBox(getYearBoxBottom());
+    }
+
+    public static Node getSelectedPane() {
+        return selectedPane;
+    }
+
+    public static void setSelectedPane(Node selectedPane) {
+        FXPanes.selectedPane = selectedPane;
     }
 
     private void flowGridPane(@NotNull FlowGridPane pane, float div, boolean visible) {
@@ -123,15 +146,20 @@ final class FXPanes {
         vBox.setMinSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);
         vBox.setPrefSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);
         vBox.setMaxSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);
+        vBox.setAlignment(Pos.CENTER);
         vBox.setVisible(false);
     }
 
-    public static Pane getSelectedPane() {
-        return selectedPane;
-    }
-
-    public static void setSelectedPane(Pane selectedPane) {
-        FXPanes.selectedPane = selectedPane;
+    private void hBox(@NotNull HBox hBox) {
+        hBox.setCenterShape(true);
+        hBox.setPadding(new Insets(5));
+        hBox.setBackground(FXVar.SCENE_BACKGROUND);
+        hBox.setMinSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS / 2.0);
+        hBox.setPrefSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS / 2.0);
+        hBox.setMaxSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS / 2.0);
+        hBox.setAlignment(Pos.CENTER);
+        hBox.setVisible(true);
+        hBox.setBorder(FXVar.MENU_BUTTON_BORDER_DARK);
     }
 
     public @NotNull VBox getWelcomeBox() {
@@ -232,5 +260,21 @@ final class FXPanes {
 
     public @NotNull VBox getYearBox() {
         return yearBox;
+    }
+
+    public @NotNull HBox getCurrentBoxBottom() {
+        return currentBoxBottom;
+    }
+
+    public @NotNull HBox getDayBoxBottom() {
+        return dayBoxBottom;
+    }
+
+    public @NotNull HBox getMonthBoxBottom() {
+        return monthBoxBottom;
+    }
+
+    public @NotNull HBox getYearBoxBottom() {
+        return yearBoxBottom;
     }
 }

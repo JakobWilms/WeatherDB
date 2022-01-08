@@ -27,9 +27,10 @@ final class FXPaneUtils {
     }
 
     static @NotNull FlowGridPane menuPane() {
-        FlowGridPane menuPane = new FlowGridPane(10, 1,
+        FlowGridPane menuPane = new FlowGridPane(11, 1,
                 FXTiles.getMenuOverview(), FXTiles.getMenuCurrent(), FXTiles.getMenuDay(), FXTiles.getMenuMonth(), FXTiles.getMenuYear(),
-                FXTiles.getMenuTemp(), FXTiles.getMenuRainfall(), FXTiles.getMenuWind(), FXTiles.getMenuClouds(), FXTiles.getMenuHumidity());
+                FXTiles.getMenuTemp(), FXTiles.getMenuRainfall(), FXTiles.getMenuWind(), FXTiles.getMenuClouds(), FXTiles.getMenuHumidity(),
+                FXTiles.getMenuAlone());
 
         menuPane.setAlignment(Pos.CENTER);
         menuPane.setCenterShape(true);
@@ -40,14 +41,15 @@ final class FXPaneUtils {
         menuPane.setBackground(FXVar.SCENE_BACKGROUND);
         menuPane.setVgap(5);
         final RowConstraints rowConstraints = new RowConstraints(
-                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 10,
-                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 10,
-                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 10,
+                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 11,
+                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 11,
+                (double) (FXVar.SCREEN_SIZE.height - FXVar.TILE_HEIGHT_TIME) / 11,
                 Priority.ALWAYS, VPos.CENTER, false
         );
         menuPane.getRowConstraints().setAll(
                 rowConstraints, rowConstraints, rowConstraints, rowConstraints, rowConstraints,
-                rowConstraints, rowConstraints, rowConstraints, rowConstraints, rowConstraints
+                rowConstraints, rowConstraints, rowConstraints, rowConstraints, rowConstraints,
+                rowConstraints
         );
 
         return menuPane;
@@ -129,32 +131,32 @@ final class FXPaneUtils {
 
     static @NotNull FlowGridPane tempPane() {
         return new FlowGridPane(2, 2,
-                FXTiles.getTempNow(), FXTiles.getTempDay(),
-                FXTiles.getTempMonth(), FXTiles.getTempYear());
+                FXTiles.getTempNowSingle(), FXTiles.getTempDaySingle(),
+                FXTiles.getTempMonthSingle(), FXTiles.getTempYearSingle());
     }
 
     static @NotNull FlowGridPane windPane() {
         return new FlowGridPane(2, 2,
-                FXTiles.getWindNow(), FXTiles.getWindDay(),
-                FXTiles.getWindMonth(), FXTiles.getWindYear());
+                FXTiles.getWindNowSingle(), FXTiles.getWindDaySingle(),
+                FXTiles.getWindMonthSingle(), FXTiles.getWindYearSingle());
     }
 
     static @NotNull FlowGridPane rainfallPane() {
         return new FlowGridPane(2, 2,
-                FXTiles.getRainfallNow(), FXTiles.getRainfallDay(),
-                FXTiles.getRainfallMonth(), FXTiles.getRainfallYear());
+                FXTiles.getRainfallNowSingle(), FXTiles.getRainfallDaySingle(),
+                FXTiles.getRainfallMonthSingle(), FXTiles.getRainfallYearSingle());
     }
 
     static @NotNull FlowGridPane cloudsPane() {
         return new FlowGridPane(2, 2,
-                FXTiles.getCloudsNow(), FXTiles.getCloudsDay(),
-                FXTiles.getCloudsMonth(), FXTiles.getCloudsYear());
+                FXTiles.getCloudsNowSingle(), FXTiles.getCloudsDaySingle(),
+                FXTiles.getCloudsMonthSingle(), FXTiles.getCloudsYearSingle());
     }
 
     static @NotNull FlowGridPane humidityPane() {
         return new FlowGridPane(2, 2,
-                FXTiles.getHumidityNow(), FXTiles.getHumidityDay(),
-                FXTiles.getHumidityMonth(), FXTiles.getHumidityYear());
+                FXTiles.getHumidityNowSingle(), FXTiles.getHumidityDaySingle(),
+                FXTiles.getHumidityMonthSingle(), FXTiles.getHumidityYearSingle());
     }
 
     static @NotNull VBox welcomeBox() {
@@ -172,6 +174,12 @@ final class FXPaneUtils {
     }
 
     static void tilePane(@NotNull StackPane tilePane) {
+        tilePane.getChildren().addAll(
+                FXTiles.getTempNowAlone(), FXTiles.getRainfallNowAlone(), FXTiles.getWindNowAlone(), FXTiles.getCloudsNowAlone(), FXTiles.getHumidityNowAlone(),
+                FXTiles.getTempDayAlone(), FXTiles.getRainfallDayAlone(), FXTiles.getWindDayAlone(), FXTiles.getCloudsDayAlone(), FXTiles.getHumidityDayAlone(),
+                FXTiles.getTempMonthAlone(), FXTiles.getRainfallMonthAlone(), FXTiles.getWindMonthAlone(), FXTiles.getCloudsMonthAlone(), FXTiles.getHumidityMonthAlone(),
+                FXTiles.getTempYearAlone(), FXTiles.getRainfallYearAlone(), FXTiles.getWindYearAlone(), FXTiles.getCloudsYearAlone(), FXTiles.getHumidityYearAlone()
+        );
         tilePane.setMinSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);
         tilePane.setPrefSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);
         tilePane.setMaxSize(FXVar.STACK_PANE_CONSTRAINTS_WIDTH * FXVar.MUL_CONSTRAINTS, FXVar.STACK_PANE_CONSTRAINTS_HEIGHT * FXVar.MUL_CONSTRAINTS);

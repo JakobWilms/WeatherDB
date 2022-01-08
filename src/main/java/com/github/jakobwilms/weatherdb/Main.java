@@ -16,14 +16,14 @@ public class Main {
     public static final String version;
 
     static {
-        version = "0.0.1";
+        version = "0.0.2";
     }
 
     public static void main(String[] args) {
         arguments = new Arguments(args);
 
         try (Connection connection = DriverManager
-                .getConnection(String.format("jdbc:mysql://%s/?user=%s&password=%s", arguments().getHost(), arguments().getUsername(), arguments().getPassword()))) {
+                .getConnection(String.format("jdbc:mysql://%s:%s/?user=%s&password=%s", arguments().getHost(), arguments().getPort(), arguments().getUsername(), arguments().getPassword()))) {
             print("Creating Test Connection");
 
             boolean isValid = connection.isValid(0);
@@ -44,7 +44,8 @@ public class Main {
             e.printStackTrace();
         }
         try (Connection connection = DriverManager
-                .getConnection(String.format("jdbc:mysql://%s/%s", arguments().getHost(), arguments.getDatabase()), arguments().getUsername(), arguments.getPassword())) {
+                .getConnection(String.format("jdbc:mysql://%s:%s/%s", arguments().getHost(), arguments().getPort(), arguments().getDatabase()),
+                        arguments().getUsername(), arguments().getPassword())) {
             print("Creating Database Connection");
 
             boolean isValid = connection.isValid(0);

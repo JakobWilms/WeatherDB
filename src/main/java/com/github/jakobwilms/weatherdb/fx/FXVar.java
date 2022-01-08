@@ -5,10 +5,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import org.jetbrains.annotations.NotNull;
 
-import java.awt.*;
-
 public class FXVar {
-    public static final Dimension SCREEN_SIZE = Toolkit.getDefaultToolkit().getScreenSize();
+    public static final java.awt.Dimension SCREEN_SIZE = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
     public static final int PARTS_CONSTRAINTS = 12;
     public static final int MUL_CONSTRAINTS = PARTS_CONSTRAINTS - 2;
@@ -17,16 +15,18 @@ public class FXVar {
     public static final int TILE_WIDTH_SINGLE_VIEW = Math.toIntExact(Math.round(SCREEN_SIZE.width / 2.5));
     public static final int TILE_HEIGHT_SINGLE_VIEW = Math.toIntExact(Math.round(SCREEN_SIZE.height / 2.5));
 
+
     public static final int TILE_WIDTH_MENU = Math.toIntExact(Math.round(SCREEN_SIZE.width / 8.0));
-    public static final int TILE_HEIGHT_MENU = Math.toIntExact(Math.round(SCREEN_SIZE.height / 15.0));
-
     public static final int TILE_WIDTH_TIME = Math.toIntExact(Math.round((SCREEN_SIZE.width - TILE_WIDTH_MENU) / 6.0));
-    public static final int TILE_HEIGHT_TIME = Math.toIntExact(Math.round(TILE_HEIGHT_MENU * 1.5));
-
+    public static final int TILE_WIDTH_TIME_VIEW = Math.toIntExact(Math.round((SCREEN_SIZE.width - TILE_WIDTH_MENU) / 3.5));
     public static final int STACK_PANE_CONSTRAINTS_WIDTH = (int) ((float) (SCREEN_SIZE.width - TILE_WIDTH_MENU) / PARTS_CONSTRAINTS);
-    public static final int STACK_PANE_CONSTRAINTS_HEIGHT = (int) ((float) (SCREEN_SIZE.height - TILE_HEIGHT_MENU) / PARTS_CONSTRAINTS);
-
+    public static final int TILE_WIDTH_ALONE = STACK_PANE_CONSTRAINTS_WIDTH * MUL_CONSTRAINTS;
     public static final int TILE_WIDTH_OVERVIEW = Math.toIntExact(Math.round(STACK_PANE_CONSTRAINTS_WIDTH * 1.6));
+    public static final int TILE_HEIGHT_MENU = Math.toIntExact(Math.round(SCREEN_SIZE.height / 15.0));
+    public static final int TILE_HEIGHT_TIME = Math.toIntExact(Math.round(TILE_HEIGHT_MENU * 1.5));
+    public static final int TILE_HEIGHT_TIME_VIEW = Math.toIntExact(Math.round((SCREEN_SIZE.height - TILE_HEIGHT_TIME) / 2.5));
+    public static final int STACK_PANE_CONSTRAINTS_HEIGHT = (int) ((float) (SCREEN_SIZE.height - TILE_HEIGHT_MENU) / PARTS_CONSTRAINTS);
+    public static final int TILE_HEIGHT_ALONE = STACK_PANE_CONSTRAINTS_HEIGHT * MUL_CONSTRAINTS;
     public static final int TILE_HEIGHT_OVERVIEW = Math.toIntExact(Math.round(STACK_PANE_CONSTRAINTS_HEIGHT * 2));
 
     public static final @NotNull Color SCENE_BACKGROUND_COLOR = Color.web("#101214");

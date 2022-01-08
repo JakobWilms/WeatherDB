@@ -176,7 +176,7 @@ final class FXTileUtils {
         return tile;
     }
 
-    static @NotNull Tile tempCurrent(String text, int width, int height) {
+    static @NotNull Tile tempCurrent(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.FIRE_SMOKE)
                 .prefSize(width, height)
@@ -192,10 +192,13 @@ final class FXTileUtils {
                 .animated(true)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile temp(String text, int width, int height) {
+    static @NotNull Tile temp(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.SPARK_LINE)
                 .prefSize(width, height)
@@ -213,10 +216,13 @@ final class FXTileUtils {
                 .smoothing(false)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile windCurrent(String text, int width, int height) {
+    static @NotNull Tile windCurrent(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.GAUGE2)
                 .prefSize(width, height)
@@ -237,10 +243,13 @@ final class FXTileUtils {
                 .animated(true)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile wind(String text, int width, int height) {
+    static @NotNull Tile wind(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.SMOOTH_AREA_CHART)
                 .prefSize(width, height)
@@ -253,10 +262,13 @@ final class FXTileUtils {
                 .chartData(new ChartData("1", 40, Tile.BLUE), new ChartData("2", 70, Tile.BLUE), new ChartData("3", 20, Tile.BLUE))
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile rainfallCurrent(String text, int width, int height) {
+    static @NotNull Tile rainfallCurrent(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.FLUID)
                 .prefSize(width, height)
@@ -275,10 +287,13 @@ final class FXTileUtils {
                 .animated(true)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile rainfall(String text, int width, int height) {
+    static @NotNull Tile rainfall(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.TIMELINE)
                 .prefSize(width, height)
@@ -318,10 +333,13 @@ final class FXTileUtils {
                 .timeoutMs(60000)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile cloudsCurrent(String text, int width, int height) {
+    static @NotNull Tile cloudsCurrent(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.RADIAL_PERCENTAGE)
                 .prefSize(width, height)
@@ -338,10 +356,13 @@ final class FXTileUtils {
                 .decimals(0)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile clouds(String text, int width, int height) {
+    static @NotNull Tile clouds(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.TIMELINE)
                 .prefSize(width, height)
@@ -381,10 +402,13 @@ final class FXTileUtils {
                 .timeoutMs(60000)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile humidityCurrent(String text, int width, int height) {
+    static @NotNull Tile humidityCurrent(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.RADIAL_PERCENTAGE)
                 .prefSize(width, height)
@@ -401,10 +425,13 @@ final class FXTileUtils {
                 .decimals(0)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 
-    static @NotNull Tile humidity(String text, int width, int height) {
+    static @NotNull Tile humidity(String text, int width, int height, String id, boolean visible) {
         final Tile tile = TileBuilder.create()
                 .skinType(Tile.SkinType.SPARK_LINE)
                 .prefSize(width, height)
@@ -422,6 +449,9 @@ final class FXTileUtils {
                 .smoothing(false)
                 .build();
         tile.setBorder(FXVar.TILE_BORDER);
+        tile.setOnMouseClicked(FXEvent.TILE_HANDLER);
+        tile.setId(id);
+        tile.setVisible(visible);
         return tile;
     }
 }
