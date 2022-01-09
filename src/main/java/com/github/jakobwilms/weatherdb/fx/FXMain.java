@@ -1,5 +1,6 @@
 package com.github.jakobwilms.weatherdb.fx;
 
+import com.github.jakobwilms.weatherdb.ut.Utils;
 import javafx.application.Application;
 import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
@@ -18,30 +19,36 @@ public class FXMain extends Application {
 
     @Override
     public void init() {
-        FXTiles.init();
-
+        Utils.print("Creating AnimationTimer");
         fxTimer = new FXTimer();
     }
 
     @Override
     public void start(@NotNull Stage stage) {
         try {
+            Utils.print("Initializing FXPanes");
             fxPanes = new FXPanes();
 
             FXPanes.setSelectedPane(getFxPanes().getWelcomeBox());
 
+            Utils.print("Creating Camera");
             PerspectiveCamera camera = new PerspectiveCamera();
             camera.setFieldOfView(10);
 
+            Utils.print("Creating Scene");
             Scene scene = new Scene(fxPanes.getMainPane());
             scene.setCamera(camera);
 
+            Utils.print("Initializing Stage");
             stage.setTitle("WeatherDB");
             stage.setScene(scene);
             stage.setFullScreen(true);
             stage.setFullScreenExitHint("");
+            Utils.print("Showing Stage");
             stage.show();
 
+
+            Utils.print("Starting AnimationTimer");
             fxTimer.start();
         } catch (Exception e) {
             e.printStackTrace();

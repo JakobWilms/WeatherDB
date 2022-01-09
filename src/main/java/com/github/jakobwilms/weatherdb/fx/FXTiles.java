@@ -139,10 +139,6 @@ final class FXTiles {
         FXTiles.selectedMenuButton = selectedMenuButton;
     }
 
-    static void init() {
-
-    }
-
     public static @NotNull Tile getTempNowAlone() {
         return tempNowAlone;
     }

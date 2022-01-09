@@ -6,7 +6,7 @@ import java.time.Duration;
 
 final class FXTimer extends AnimationTimer {
 
-    public static final long waitSeconds = 5;
+    public static final long waitSeconds = 60;
     private static boolean refresh = true;
     private long lastTimerCall;
 
