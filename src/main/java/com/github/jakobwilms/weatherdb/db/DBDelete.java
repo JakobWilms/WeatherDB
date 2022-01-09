@@ -36,4 +36,17 @@ public class DBDelete {
             return false;
         }
     }
+
+    @SuppressWarnings("SqlWithoutWhere")
+    static boolean simpleDelete0() {
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM " + getTable());
+            statement.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
