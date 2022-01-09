@@ -49,7 +49,7 @@ public class DBTable {
                         rainfall    VARCHAR(30) NOT NULL,
                         humidity    VARCHAR(30) NOT NULL,
                         wind        VARCHAR(30) NOT NULL,
-                        clouds      VARCHAR(30) NOT NULL,
+                        clouds      VARCHAR(30) NOT NULL
                     );""");
             statement.executeUpdate();
         } catch (SQLException e) {
