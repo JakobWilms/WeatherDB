@@ -1,5 +1,7 @@
 package com.github.jakobwilms.weatherdb;
 
+import org.jetbrains.annotations.NotNull;
+
 public class Arguments {
 
     private String username, password, host, database, port;
@@ -7,17 +9,29 @@ public class Arguments {
     private boolean initialized;
 
     Arguments() {
-        this(new String[0]);
+        this(new String[0], true);
     }
 
     Arguments(String @org.jetbrains.annotations.NotNull [] args) {
+        this(args, false);
+    }
+
+    private Arguments(String @NotNull [] args, boolean internal) {
         initialized = false;
-        parseArgs(args);
+        _parseArgs(args, internal);
     }
 
     public void parseArgs(String @org.jetbrains.annotations.NotNull [] args) {
-        if (args.length == 0)
+        _parseArgs(args, false);
+    }
+
+    private void _parseArgs(String @NotNull [] args, boolean internal) {
+        if (args.length == 0) {
+            if (!internal) {
+                this.initialized = true;
+            }
             return;
+        }
         if (initialized)
             throw new IllegalStateException("Arguments have been passed already!");
 

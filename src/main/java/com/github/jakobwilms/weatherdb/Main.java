@@ -16,7 +16,7 @@ public class Main {
     public static final String version;
 
     static {
-        version = "0.0.2";
+        version = "0.0.3";
     }
 
     public static void main(String[] args) {
