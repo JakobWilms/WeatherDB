@@ -12,7 +12,7 @@ import static com.github.jakobwilms.weatherdb.ut.Utils.print;
 
 public class Main {
 
-    private static Arguments arguments;
+    private static final Arguments arguments = new Arguments();
     public static final String version;
 
     static {
@@ -20,7 +20,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        arguments = new Arguments(args);
+        arguments().parseArgs(args);
 
         try (Connection connection = DriverManager
                 .getConnection(String.format("jdbc:mysql://%s:%s/?user=%s&password=%s", arguments().getHost(), arguments().getPort(), arguments().getUsername(), arguments().getPassword()))) {
@@ -36,7 +36,7 @@ public class Main {
             print("Valid Connection: " + isValid);
 
             if (!isValid) {
-                System.exit(-1);
+                System.exit(2);
             }
 
             createDB(connection);
@@ -54,7 +54,7 @@ public class Main {
             print("Valid Connection: " + isValid);
 
             if (!isValid) {
-                System.exit(-1);
+                System.exit(2);
             }
             setConnection(connection);
 
@@ -62,6 +62,8 @@ public class Main {
             createTable();
             setTable("weatherDaily");
             createTable();
+            setTable("weatherCurrent");
+            createSimpleTable();
 
             if (arguments().isGui()) {
                 print("Starting GUI");
