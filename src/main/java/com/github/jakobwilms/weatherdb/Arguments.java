@@ -78,7 +78,7 @@ public class Arguments {
     private void help() {
         System.out.println("""
                     USAGE:
-                    WeatherDB-$VERSION.jar [OPTION]...
+                    weatherdb [OPTION]...
                     
                     INFO:
                     Start the WeatherDB Program, custom options may be appended.
