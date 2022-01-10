@@ -1,3 +1,11 @@
 #!/bin/bash
-cd || exit
-
+{
+  cd
+  mkdir ".weatherdb"
+  wget -q -t 3 -P .weatherdb "https://github.com/JakobWilms/WeatherDB/raw/master/WeatherDB.jar"
+  wget -q -t 3 -P /usr/bin/ "https://raw.githubusercontent.com/JakobWilms/WeatherDB/master/src/main/bash/weatherdb"
+  sudo chmod +x /usr/bin/weatherdb
+} || {
+  echo "Error. Aborting."
+  exit
+}
